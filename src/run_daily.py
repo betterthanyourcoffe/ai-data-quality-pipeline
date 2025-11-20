@@ -1,5 +1,7 @@
 import os
+import json
 from datetime import datetime
+from email_alert import send_daily_email
 
 # Import all pipeline functions
 from fetch_coingecko import fetch_bitcoin_data
@@ -42,7 +44,6 @@ def run_daily_pipeline():
 
     # Save anomalies to file
     with open("data/anomalies.json", "w") as f:
-        import json
         json.dump(anomalies, f, indent=4)
 
     print("  → Anomalies saved.")
@@ -56,13 +57,19 @@ def run_daily_pipeline():
     # STEP 5: Generate HTML Report
     print("5️⃣ Generating HTML report...")
     generate_report()
+    report_path = f"data/report/report_{today}.html"
+
+    # STEP 6: SEND EMAIL
+    print("6️⃣ Sending daily email with summary + report...")
+    send_daily_email(anomalies, clean_today, summary_text, report_path)
 
     print("\n🎉 Daily Pipeline Complete!")
     print("📄 Report saved in data/report/")
     print("🧠 AI summary saved in data/summary/")
     print("📈 Clean data saved in data/clean/")
     print("💾 Raw data saved in data/raw/")
-    print("🚨 Anomaly data saved in data/anomalies.json\n")
+    print("🚨 Anomaly data saved in data/anomalies.json")
+    print("📧 Daily Email Sent!\n")
 
 if __name__ == "__main__":
     run_daily_pipeline()
