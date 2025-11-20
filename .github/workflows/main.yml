@@ -2,8 +2,8 @@ name: Daily Bitcoin Pipeline
 
 on:
   schedule:
-    - cron: "0 12 * * *" # Runs every day at 12:00 UTC
-  workflow_dispatch: # Allow manual run
+    - cron: "0 12 * * *"  # Runs daily at 12:00 UTC
+  workflow_dispatch:
 
 jobs:
   run-pipeline:
@@ -34,11 +34,16 @@ jobs:
       - name: Run Daily Pipeline
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
         run: |
           source venv/bin/activate
           python src/run_daily.py
 
-      - name: Upload Reports (optional)
+      - name: Upload Reports
         uses: actions/upload-artifact@v4
         with:
           name: daily-reports
