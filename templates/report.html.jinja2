@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bitcoin Daily Report - {{ date }}</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 { color: #2c3e50; }
+        h2 { color: #34495e; }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .anomaly {
+            background-color: #ffe8e8;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-left: 5px solid red;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Bitcoin Daily Report — {{ date }}</h1>
+
+<h2>📊 Clean Data</h2>
+<pre>{{ clean_data | tojson(indent=2) }}</pre>
+
+<h2>🚨 Anomalies</h2>
+{% if anomalies %}
+    {% for a in anomalies %}
+        <div class="anomaly">
+            <strong>Metric:</strong> {{ a.metric }}<br>
+            <strong>Today:</strong> {{ a.today }}<br>
+            <strong>Note:</strong> {{ a.note }}
+        </div>
+    {% endfor %}
+{% else %}
+    <p>No anomalies today 🚀</p>
+{% endif %}
+
+<h2>🧠 AI Summary</h2>
+<p>{{ summary }}</p>
+
+</body>
+</html>
