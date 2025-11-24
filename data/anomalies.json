@@ -1,1 +1,9 @@
-[]
+[
+    {
+        "metric": "volume",
+        "today": 77589783995,
+        "yesterday": 148572656427,
+        "change%": 47.78,
+        "note": "Abnormal volume change (>20%)"
+    }
+]

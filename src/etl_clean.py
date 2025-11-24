@@ -5,7 +5,7 @@ def clean_bitcoin_data(raw_json_path):
     """Extract useful fields from the raw CoinGecko JSON."""
 
     with open(raw_json_path, "r") as f:
-        data = json.load(f)
+        data = json.load(f)#creates a python dictionary from the json file
 
     # Extract fields safely using .get()
     market_data = data.get("market_data", {})

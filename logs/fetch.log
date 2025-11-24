@@ -16,3 +16,16 @@
 [2025-11-20 16:18:38] Starting request to CoinGecko...
 [2025-11-20 16:18:38] Request successful!
 [2025-11-20 16:18:38] Saved raw data to data/raw/bitcoin_2025-11-20.json
+[2025-11-20 16:31:44] Starting request to CoinGecko...
+[2025-11-20 16:31:45] Request successful!
+[2025-11-20 16:31:45] Saved raw data to data/raw/bitcoin_2025-11-20.json
+[2025-11-20 19:37:48] Starting request to CoinGecko...
+[2025-11-20 19:37:48] Request successful!
+[2025-11-20 19:37:48] Saved raw data to data/raw/bitcoin_2025-11-20.json
+[2025-11-20 19:39:16] Starting request to CoinGecko...
+[2025-11-20 19:39:16] Request failed with status 404
+[2025-11-21 09:49:06] Starting request to CoinGecko...
+[2025-11-21 09:49:06] Request failed with status 404
+[2025-11-21 09:51:12] SUCCESS: Fetched data and saved to data/raw/bitcoin_2025-11-21.json
+[2025-11-21 09:51:58] SUCCESS: Fetched data and saved to data/raw/bitcoin_2025-11-21.json
+[2025-11-24 17:43:57] SUCCESS: Fetched data and saved to data/raw/bitcoin_2025-11-24.json

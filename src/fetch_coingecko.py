@@ -1,43 +1,34 @@
+#timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 import requests
-import json
 import os
+import json
+from dotenv import load_dotenv  
 from datetime import datetime
+load_dotenv()
+API_URL = "https://api.coingecko.com/api/v3/coins/bitcoin"  
 
-LOG_FILE = "logs/fetch.log"
+logfile = "logs/fetch.log"
 
-def log(message: str):
-    """Simple logger that appends messages to logs/fetch.log"""
+def log(msg):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    with open(LOG_FILE, "a") as f:
-        f.write(f"[{timestamp}] {message}\n")
-
+    with open(logfile, "a") as f:
+        f.write(f"[{timestamp}] {msg}\n")
 
 def fetch_bitcoin_data():
-    url = "https://api.coingecko.com/api/v3/coins/bitcoin"
-
-    log("Starting request to CoinGecko...")
-
-    response = requests.get(url)
+    response = requests.get(API_URL)
 
     if response.status_code != 200:
-        log(f"Request failed with status {response.status_code}")
-        raise Exception("API request failed")
-
-    log("Request successful!")
+        log(f"ERROR: Failed to fetch data. Status code: {response.status_code}")
+        return None
 
     data = response.json()
-
-    # Save raw JSON
     today = datetime.now().strftime("%Y-%m-%d")
-    output_path = f"data/raw/bitcoin_{today}.json"
-
+    output_path = f"data/raw/bitcoin_{today}.json"  
     with open(output_path, "w") as f:
         json.dump(data, f, indent=4)
 
-    log(f"Saved raw data to {output_path}")
-
-    print(f"Data saved to {output_path}")
-
-
+    log(f"SUCCESS: Fetched data and saved to {output_path}")
+    return data 
 if __name__ == "__main__":
-    fetch_bitcoin_data()
+    os.makedirs("data/raw", exist_ok=True)
+    fetch_bitcoin_data()    
